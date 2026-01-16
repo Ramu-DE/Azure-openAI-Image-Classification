@@ -1,0 +1,39 @@
+# Enhanced Image Classification Pipeline Dependencies
+
+# Core dependencies
+openai>=2.0.0
+pillow>=10.0.0
+pyyaml>=6.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Visualization and reporting
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+hypothesis>=6.82.0
+
+# Development tools
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Optional: Performance monitoring
+psutil>=5.9.0
+
+# Optional: Advanced image processing
+opencv-python>=4.8.0
+
+# Optional: Database support
+sqlalchemy>=2.0.0
+
+# Optional: Web API framework
+fastapi>=0.100.0
+uvicorn>=0.23.0
