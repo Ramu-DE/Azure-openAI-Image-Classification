@@ -53,8 +53,8 @@ The original flower classification achieves **97% accuracy** on the test dataset
 ### Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Ramu-DE/Image-classification.git
-cd Image-classification
+git clone https://github.com/Ramu-DE/Azure-openAI-Image-Classification.git
+cd Azure-openAI-Image-Classification
 
 # Install dependencies
 pip install -r requirements.txt
@@ -68,26 +68,66 @@ cp azure.env.example azure.env
 
 ### Single Image Classification
 ```python
-from enhanced_classification import ImageClassifier
+import os
+from openai import AzureOpenAI
+from dotenv import load_dotenv
+from src.core.classifier import ImageClassifier
+
+# Load environment variables
+load_dotenv('azure.env')
+
+# Initialize Azure OpenAI client
+client = AzureOpenAI(
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
+)
 
 # Initialize classifier
-classifier = ImageClassifier()
+classifier = ImageClassifier(
+    client=client,
+    deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+)
 
-# Classify single image
-result = classifier.classify_image("path/to/image.jpg")
-print(f"Class: {result.predicted_class}, Confidence: {result.confidence}")
+# Classify a single image
+classes = ["dandelion", "rose", "sunflower", "daisy"]
+result = classifier.classify_image("flowers_images/class1/dandelion (1).jpg", classes)
+print(f"Prediction: {result['prediction']}")
 ```
 
 ### Batch Processing
 ```python
-from enhanced_classification import BatchProcessor
+import os
+from openai import AzureOpenAI
+from dotenv import load_dotenv
+from src.core.classifier import ImageClassifier
+from src.batch.processor import BatchProcessor
+from src.export.formatters import ResultFormatter
 
-# Initialize batch processor
-processor = BatchProcessor(batch_size=10)
+# Load environment variables
+load_dotenv('azure.env')
 
-# Process multiple images
-results = processor.process_directory("path/to/images/")
-processor.export_results(results, format="json", output="results.json")
+# Initialize Azure OpenAI client
+client = AzureOpenAI(
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
+)
+
+# Initialize classifier and batch processor
+classifier = ImageClassifier(
+    client=client,
+    deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+)
+processor = BatchProcessor(classifier, batch_size=10)
+
+# Process directory
+classes = ["dandelion", "rose", "sunflower", "daisy"]
+results = processor.process_directory("flowers_images/class1", classes)
+
+# Export results
+ResultFormatter.to_json(results, "results.json")
+ResultFormatter.to_csv(results, "results.csv")
 ```
 
 ### Custom Domain Configuration
@@ -105,7 +145,7 @@ animals:
 ## 📁 Project Structure
 
 ```
-enhanced-image-classification/
+Azure-openAI-Image-Classification/
 ├── src/
 │   ├── core/
 │   │   ├── __init__.py
@@ -145,8 +185,16 @@ enhanced-image-classification/
 │   ├── api_reference.md
 │   ├── configuration.md
 │   └── deployment.md
+├── flowers_images/                # Dataset (40 images)
+│   ├── class1/                    # Dandelion images
+│   ├── class2/                    # Rose images
+│   ├── class3/                    # Sunflower images
+│   └── class4/                    # Daisy images
+├── Image classification with Azure OpenAI gpt-4o - Flowers example.ipynb
 ├── requirements.txt
 ├── setup.py
+├── azure.env.example
+├── .gitignore
 └── README.md
 ```
 
