@@ -142,61 +142,6 @@ animals:
   prompt_template: "Identify the animal in this image from: {classes}"
 ```
 
-## 📁 Project Structure
-
-```
-Azure-openAI-Image-Classification/
-├── src/
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── classifier.py          # Main classification engine
-│   │   ├── preprocessor.py        # Image preprocessing
-│   │   ├── validator.py           # Result validation
-│   │   └── config_manager.py      # Configuration management
-│   ├── batch/
-│   │   ├── __init__.py
-│   │   ├── processor.py           # Batch processing
-│   │   └── progress.py            # Progress tracking
-│   ├── monitoring/
-│   │   ├── __init__.py
-│   │   ├── performance.py         # Performance monitoring
-│   │   └── alerts.py              # Alerting system
-│   ├── export/
-│   │   ├── __init__.py
-│   │   ├── formatters.py          # Export formatters
-│   │   └── integrations.py        # External integrations
-│   └── utils/
-│       ├── __init__.py
-│       ├── logging.py             # Logging utilities
-│       └── errors.py              # Error handling
-├── config/
-│   ├── domains.yaml               # Domain configurations
-│   ├── settings.yaml              # System settings
-│   └── logging.yaml               # Logging configuration
-├── tests/
-│   ├── unit/                      # Unit tests
-│   ├── integration/               # Integration tests
-│   └── property/                  # Property-based tests
-├── examples/
-│   ├── basic_usage.py
-│   ├── batch_processing.py
-│   └── custom_domain.py
-├── docs/
-│   ├── api_reference.md
-│   ├── configuration.md
-│   └── deployment.md
-├── flowers_images/                # Dataset (40 images)
-│   ├── class1/                    # Dandelion images
-│   ├── class2/                    # Rose images
-│   ├── class3/                    # Sunflower images
-│   └── class4/                    # Daisy images
-├── Image classification with Azure OpenAI gpt-4o - Flowers example.ipynb
-├── requirements.txt
-├── setup.py
-├── azure.env.example
-├── .gitignore
-└── README.md
-```
 
 ## 🧪 Testing
 
