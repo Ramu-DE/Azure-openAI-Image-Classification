@@ -1,0 +1,18 @@
+api:
+  rate_limit: 60  # requests per minute
+  timeout: 30     # seconds
+  max_retries: 3
+
+batch:
+  default_size: 10
+  checkpoint_interval: 100
+
+monitoring:
+  enable_metrics: true
+  alert_thresholds:
+    accuracy: 0.8
+    response_time: 5.0
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

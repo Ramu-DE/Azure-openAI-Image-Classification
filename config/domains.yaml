@@ -1,0 +1,26 @@
+flowers:
+  classes:
+    - dandelion
+    - rose
+    - sunflower
+    - daisy
+  prompt_template: "Classify this flower image into one of: {classes}"
+  confidence_threshold: 0.7
+
+animals:
+  classes:
+    - cat
+    - dog
+    - bird
+    - fish
+  prompt_template: "Identify the animal in this image from: {classes}"
+  confidence_threshold: 0.8
+
+objects:
+  classes:
+    - chair
+    - table
+    - car
+    - bicycle
+  prompt_template: "Classify this object image into one of: {classes}"
+  confidence_threshold: 0.75
